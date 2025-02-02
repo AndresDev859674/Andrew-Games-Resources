@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Version</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #dfe9f3 0%, #ffffff 100%);
+      }
+
+      .version-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 350px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      p {
+        font-size: 1.2em;
+        color: #666;
+      }
+
+      .version {
+        font-size: 1.5em;
+        color: #9fc6ff;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      /* Modo oscuro */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+        }
+
+        .version-container {
+          background-color: #333;
+          color: white;
+          box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+          color: #f0f0f0;
+        }
+
+        p {
+          color: #ccc;
+        }
+
+        .version {
+          color: #9fc6ff;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="version-container">
+      <h1>Your Version of Andrew Games</h1>
+      <p>Your installed version:</p>
+      <p class="version">3.3.3</p>
+    </div>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

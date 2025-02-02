@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: auto; /* Asegura que haya desplazamiento */
+      }
+      body {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Cambia a flex-start para que el contenido comience en la parte superior */
+        background: linear-gradient(135deg, #dfe9f3 0%, #ffffff 100%);
+        box-sizing: border-box;
+        zoom: 0.67; /* Ajusta el zoom al 67% */
+      }
+
+      .version-container {
+        background-color: #fff;
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        width: 500px;
+        max-width: 100%;
+        margin-top: 20px; /* Asegura que haya espacio en la parte superior */
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 25px;
+        color: #333;
+      }
+
+      p {
+        font-size: 1.3em;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .version {
+        font-size: 1.6em;
+        color: #9fc6ff;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
+
+      /* Modo oscuro */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+        }
+
+        .version-container {
+          background-color: #333;
+          color: white;
+          box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        h1 {
+          color: #f0f0f0;
+        }
+
+        p {
+          color: #ccc;
+        }
+
+        .version {
+          color: #9fc6ff;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="version-container">
+      <h1>Tutorial Basic</h1>
+      <p>Basic and easy tutorial</p>
+      <h1>Andrew Games Main</h1>
+      <img src="Tutorial Assets/tutorial1.png" alt="Tutorial Image" style="width: 100%; height: auto; margin-bottom: 20px;">
+      <p>Andrew Games Main: Here you can choose from web games, horror games, and more.</p>
+      <p class="version">Useful or Very Basic?</p>
+      <h1>Andrew Games Community</h1>
+      <p>Andrew Games Community: Explore Groups and Chat with People, Post a Game (unofficial from Andrew Games), etc.</p>
+      <h1>Checking Updates</h1>
+      <img src="Tutorial Assets/tutorial2.png" alt="Tutorial Image" style="width: 100%; height: auto; margin-bottom: 20px;">
+      <p>Check Updates: Update Your Program Easily (It's In Beta Phase)</p>
+      <p class="version">Useful or Very Basic?</p>
+    </div>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

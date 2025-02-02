@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bruh</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            background: linear-gradient(135deg, #e8f0fe, #d3e3fc);
+            color: #333;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evitar scroll */
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 95%;
+            max-width: 650px;
+            padding: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin: 0;
+            color: black;
+        }
+
+        .content a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #555;
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+        }
+
+        /* Tema oscuro */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+                color: #fff;
+            }
+
+            .container {
+                background: #1e1e1e;
+            }
+
+            .header h1 {
+                color: white;
+            }
+
+            .content a {
+                color: #8ab4f8;
+            }
+
+            .footer {
+                color: #aaa;
+            }
+        }
+    </style>
+</head>
+
+<script>
+    // Usamos el objeto 'versions' expuesto desde preload.js
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('node-version').textContent = versions.node();
+        document.getElementById('chrome-version').textContent = versions.chrome();
+        document.getElementById('electron-version').textContent = versions.electron();
+    });
+</script>
+
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>You Discovered Us!</h1>
+        </div>
+
+        <div class="content">
+            <p>You have discovered the http://localhost:3000/ of AG Accounts.</p>
+            <p>But there is nothing exciting here.</p>
+            <p>-------------------------------------------------</p>
+            <p>
+                Cannot GET / </p>
+            <p>Open the terminal to show AG Accounts information.</p>
+            
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Andrew Studies. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

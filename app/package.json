@@ -1,0 +1,45 @@
+{
+  "name": "andres-games",
+  "version": "5.2.0",
+  "description": "Andres Games es un Lanzador de Juegos Limpia y Diferente A Los Demas",
+  "main": "main.js",
+  "scripts": {
+    "start:forge": "electron-forge start",
+    "start": "electron main.js",
+    "build": "electron-builder",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "author": "Andrew Studies",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.5.0",
+    "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-rpm": "^7.5.0",
+    "@electron-forge/maker-squirrel": "^7.5.0",
+    "@electron-forge/maker-zip": "^7.5.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
+    "@electron-forge/plugin-fuses": "^7.6.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^33.0.2"
+  },
+  "build": {
+    "appId": "com.andrewstudies.ag",
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "package.json",
+      "icon.ico"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "Main Assets/icon.ico"
+    }
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "electron-squirrel-startup": "^1.0.1",
+    "express": "^4.21.2"
+  }
+}

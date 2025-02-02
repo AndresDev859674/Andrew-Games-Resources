@@ -1,0 +1,10 @@
+/* styles.css */
+
+body {
+    font-family: 'Roboto', sans-serif; /* Establece la fuente Roboto */
+    background-color: #f0f0f0; /* Color de fondo para el cuerpo */
+    color: #333; /* Color de texto */
+    padding: 20px; /* Espaciado alrededor del contenido */
+  }
+  
+/* Add styles here to customize the appearance of your app */

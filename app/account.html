@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuentas de Andrew Games</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            background: linear-gradient(135deg, #e8f0fe, #d3e3fc);
+            color: #333;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evitar el scroll */
+        }
+        .container {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 95%;
+            max-width: 650px;
+            padding: 30px;
+            position: relative; /* Para posicionar el modal correctamente */
+            opacity: 0; /* Inicialmente oculto */
+            transform: translateY(20px); /* Iniciar ligeramente desplazado hacia abajo */
+            animation: fadeInUp 0.5s forwards; /* Animación de entrada */
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        .header h1 {
+            font-size: 2rem;
+            margin: 0;
+            color: black; /* Cambiado a negro */
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 15px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .profile img:hover {
+            transform: scale(1.1);
+        }
+        .profile-description p {
+            margin: 5px 0;
+        }
+        .content a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            display: flex;
+            justify-content: flex-start; /* Alinear botones a la izquierda */
+            margin-top: 20px;
+            gap: 15px; /* Espacio entre botones */
+        }
+        .footer button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .footer button:hover {
+            background-color: #155ab6;
+            transform: translateY(-3px);
+        }
+        .footer p {
+            margin: 5px 0 0; /* Ajustado el margen */
+            font-size: 0.8rem;
+            color: #555;
+            text-align: right; /* Alinear el texto a la derecha */
+            width: 100%; /* Asegurar que ocupe todo el ancho */
+            position: absolute; /* Posicionar el texto de copyright */
+            bottom: 30px; /* Ajustar posición un poco más arriba */
+            right: 20px; /* Alinear a la derecha */
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 0.3s; /* Suaviza la transición */
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            transform: translateY(-20px); /* Iniciar ligeramente desplazado hacia arriba */
+            transition: transform 0.3s; /* Suaviza la transición de entrada */
+        }
+        .modal.show {
+            display: flex;
+            opacity: 1; /* Hacer visible */
+        }
+        .modal.show .modal-content {
+            transform: translateY(0); /* Volver a la posición original */
+        }
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            color: #555;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+
+        /* Menu del perfil */
+        .profile-menu {
+            display: none; /* Ocultar inicialmente */
+            position: absolute;
+            top: 80px; /* Ajusta según sea necesario */
+            right: 30px; /* Ajusta según sea necesario */
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100; /* Asegúrate de que esté por encima de otros elementos */
+        }
+        .profile-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        .profile-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Estilos para el tema oscuro */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212; /* Fondo oscuro */
+                color: #ffffff; /* Texto claro */
+            }
+
+            .container {
+                background: #1e1e1e; /* Fondo de contenedor oscuro */
+            }
+
+            .footer button {
+                background-color: #1a73e8; /* Color del botón */
+            }
+
+            .header h1 {
+                font-size: 2rem;
+                margin: 0;
+                color: white; /* Cambiado a negro */
+            }
+
+            .footer button:hover {
+                background-color: #155ab6; /* Color del botón al pasar el mouse */
+            }
+
+            .profile-menu {
+                background-color: #1e1e1e; /* Fondo del menú oscuro */
+                border: 1px solid #444; /* Borde más oscuro */
+            }
+
+            .profile-menu a {
+                color: #ffffff; /* Texto del menú claro */
+            }
+
+            .profile-menu a:hover {
+                background-color: #333; /* Fondo del menú al pasar el mouse */
+            }
+
+            .modal-content {
+                background-color: #1e1e1e; /* Fondo del modal oscuro */
+                border: 1px solid #444; /* Borde más oscuro */
+            }
+
+            .close {
+                color: #ffffff; /* Color del botón de cerrar en modal */
+            }
+
+            .close:hover {
+                color: #dddddd; /* Color al pasar el mouse */
+            }
+        }
+    </style>
+    <script>
+        function updateProfile(name, description, iconUrl) {
+            document.getElementById('profile-name').innerText = 'Name: ' + name;
+            document.getElementById('profile-description').innerText = description;
+            document.getElementById('profile-icon').src = iconUrl;
+        }
+
+        function changeProfileIcon() {
+            const icon = document.getElementById('profile-icon');
+            const newIconUrl = prompt('Enter new icon URL:');
+            if (newIconUrl) {
+                // Eliminar la línea que actualizaba el icono aquí
+                // document.getElementById('profile-icon').src = newIconUrl;
+            }
+        }
+
+        function openModal() {
+            const modal = document.getElementById('myModal');
+            modal.classList.add('show');
+            modal.style.display = "flex"; // Asegúrate de que esté visible
+            setTimeout(() => {
+                modal.style.opacity = 1; // Hacer el modal visible
+            }, 0); // Permitir que el navegador ejecute el cambio de display antes de cambiar la opacidad
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.opacity = 0; // Comenzar a ocultar el modal
+            setTimeout(() => {
+                modal.classList.remove('show');
+                modal.style.display = "none"; // Ocultar después de la animación
+            }, 300); // Tiempo que coincide con la duración de la animación
+        }
+
+        function saveChanges() {
+            const newName = document.getElementById('new-name').value;
+            const newDescription = document.getElementById('new-description').value;
+            const newIconUrl = document.getElementById('new-icon-url').value;
+
+            if (newName) {
+                document.getElementById('profile-name').innerText = 'Name: ' + newName;
+            }
+            if (newDescription) {
+                document.getElementById('profile-description').innerText = newDescription;
+            }
+            if (newIconUrl) {
+                document.getElementById('profile-icon').src = newIconUrl;
+            }
+            closeModal();
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('profile-name').innerText.replace('Name: ', '');
+            const description = document.getElementById('profile-description').innerText;
+            const iconUrl = document.getElementById('profile-icon').src;
+
+            const profileData = { name, description, iconUrl };
+
+            fetch('http://localhost:3000/saveProfile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(profileData)
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profileMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const icon = document.getElementById('profile-icon');
+            icon.addEventListener('dblclick', changeProfileIcon);
+
+            // Cargar perfil al inicio
+            fetch('http://localhost:3000/loadProfile')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    updateProfile(data.name, data.description, data.iconUrl);
+                })
+                .catch(error => console.error('Error loading profile:', error));
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cuentas de Andrew Games</h1>
+            <img src="Main Assets/icon.png" alt="Logo">
+        </div>
+        <div class="profile">
+            <img id="profile-icon" src="profile-pic.png" alt="Profile" onclick="toggleProfileMenu()">
+            <div class="profile-description">
+                <p id="profile-name">Nombre: Personal</p>
+                <p id="profile-description">Pon La Descripcion Aqui</p>
+            </div>
+        </div>
+        <div class="profile-menu" id="profileMenu">
+            <a href="#" onclick="openModal()">Editar Perfil</a>
+            <a href="#" onclick="saveProfile()">Guardar Perfil</a>
+        </div>
+        <div class="content">
+            <p>Mas Opciones y Funciones Proximamente!</p>
+        </div>
+        <div class="footer">
+            <button onclick="openModal()">Cambiar Perfil</button>
+            <button onclick="saveProfile()">Guardar Perfil</button>
+            <p>&copy; 2025 Andrew Studies. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Editar Perfil</h2>
+            <input type="text" id="new-name" placeholder="Pon Un Nuevo Nombre">
+            <textarea id="new-description" placeholder="Pon Un Nuevo Descripcion"></textarea>
+            <input type="text" id="new-icon-url" placeholder="Pon Un Nuevo Icono de Perfil URL">
+            <button onclick="saveChanges()">Guardar Cambios</button>
+        </div>
+    </div>
+</body>
+</html>

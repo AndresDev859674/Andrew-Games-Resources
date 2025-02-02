@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de la versión</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            background: linear-gradient(135deg, #e8f0fe, #d3e3fc);
+            color: #333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            overflow: hidden; /* Oculta el desbordamiento en el cuerpo */
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            gap: 20px;
+            overflow: auto; /* Habilita el desplazamiento tanto horizontal como vertical */
+            max-height: 90vh; /* Limita la altura máxima del contenedor */
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 48%;
+            padding: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin: 0;
+            color: black;
+        }
+
+        .version-info {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #155ab6;
+            transform: translateY(-3px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+            animation: fadeInModal 0.4s ease-in-out;
+        }
+
+        @keyframes fadeInModal {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            right: 15px;
+            transition: color 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            cursor: pointer;
+        }
+
+        .btn-alt {
+            background-color: #fbbc05; 
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-alt:hover {
+            background-color: #e8a900;
+        }
+
+        .btn-danger {
+            background-color: #ea4335; 
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-danger:hover {
+            background-color: #c1351d;
+        }
+
+        /* Tema oscuro */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+                color: #fff;
+            }
+
+            .modal-content {
+               background-color: #1e1e1e;
+            }
+
+            .container {
+                background: #1e1e1e;
+            }
+
+            .header h1 {
+                color: white;
+            }
+
+            .footer {
+                color: #aaa;
+            }
+        }
+
+        /* Estilo específico para el logo de Node.js */
+        .node-icon {
+            width: 80px;  /* Icono más ancho */
+            height: 80px;
+        }
+
+        .bottom-container {
+            margin-top: 40px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Fila superior: Google Chrome y Electron -->
+        <div class="top-row">
+            <div class="container">
+                <div class="header">
+                    <img src="https://raw.githubusercontent.com/AndresDev859674/Andrew-Games-Resources/refs/heads/main/icon.png" alt="Icono de Google Chrome">
+                    <h1>Acerca de AG</h1>
+                </div>
+                <div class="version-info">
+                    <p>La versión que estás usando actualmente es:</p>
+                    <p class="version">Versión AG: <span id="chrome-version">5.2.0</span></p>
+                </div>
+                <button class="btn" id="details-btn">Ver más detalles</button>
+                <div class="footer">© 2025 Andrew Studies</div>
+            </div>
+
+            <div class="container">
+                <div class="header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Electron_Software_Framework_Logo.svg/256px-Electron_Software_Framework_Logo.svg.png" alt="Icono de Electron">
+                    <h1>Acerca de Electron</h1>
+                </div>
+                <div class="version-info">
+                    <p>Estás utilizando una versión de Electron.</p>
+                    <p class="version">Versión de Electron: <span id="electron-version">electron@33.0.2</span></p>
+                </div>
+                <button class="btn" id="electron-details-btn">Ver más detalles</button>
+                <div class="footer">© 2025 Electron</div>
+            </div>
+        </div>
+
+        <!-- Contenedor para Node.js y npm (Separado, debajo de los otros) -->
+        <div class="bottom-container container">
+            <div class="header">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-node-js-logo-icon-download-in-svg-png-gif-file-formats--nodejs-programming-language-pack-logos-icons-1174925.png?f=webp&w=256" alt="Icono de Node.js" class="node-icon">
+                <h1>npm, Node JS</h1>
+            </div>
+            <div class="version-info">
+                <p>Versiones de Node.js y npm instaladas en tu entorno.</p>
+            </div>
+            <!-- Ahora el botón "Ver más detalles" también está aquí -->
+            <button class="btn" id="npm-details-btn">Ver más detalles</button>
+            <div class="footer">© 2025 Node JS</div>
+        </div>
+    </div>
+
+    <!-- Modal de detalles de AG -->
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Detalles de AG</h2>
+            <ul>
+                <li><strong>Versión de AG:</strong> 5.2.0</li>
+                <li><strong>Motor V8:</strong> V8 JavaScript Engine (v11.6.189)</li>
+                <li><strong>Nombre del archivo:</strong> Andrew Games.exe</li>
+                <li><strong>Almacenamiento de datos:</strong> %appdata%/andrew-games</li>
+                <li><strong>Versión de Chromium:</strong> 131.0.6778.70</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal de detalles de Electron -->
+    <div id="electron-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Detalles de Electron</h2>
+            <ul>
+                <li><strong>Versión de Electron:</strong> electron@33.0.2</li>
+                <li><strong>Empaquetador de programa:</strong> @electron-forge/cli@7.5.0</li>
+                <li><strong>Notificaciones:</strong> electron-notifications@1.0.0</li>
+                <li><strong>Creador de Node.js:</strong> v20.18.0</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal de detalles de npm y Node.js -->
+    <div id="npm-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Detalles de npm y Node.js</h2>
+            <ul>
+                <li><strong>Versión de Node.js (del creador):</strong> v20.18.0</li>
+                <li><strong>Versión de npm (del creador):</strong> 10.8.2</li>
+                <li><strong>Paquete (del creador):</strong> npm-cli@10.8.2</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Modal de detalles de AG
+        var modal = document.getElementById("details-modal");
+        var btn = document.getElementById("details-btn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal || event.target == electronModal || event.target == npmModal) {
+                modal.style.display = "none";
+                electronModal.style.display = "none";
+                npmModal.style.display = "none";
+            }
+        }
+
+        // Modal de detalles de Electron
+        var electronModal = document.getElementById("electron-details-modal");
+        var electronBtn = document.getElementById("electron-details-btn");
+
+        electronBtn.onclick = function() {
+            electronModal.style.display = "block";
+        }
+
+        electronModal.getElementsByClassName("close")[0].onclick = function() {
+            electronModal.style.display = "none";
+        }
+
+        // Modal de detalles de npm y Node.js
+        var npmModal = document.getElementById("npm-details-modal");
+        var npmBtn = document.getElementById("npm-details-btn");
+
+        npmBtn.onclick = function() {
+            npmModal.style.display = "block";
+        }
+
+        npmModal.getElementsByClassName("close")[0].onclick = function() {
+            npmModal.style.display = "none";
+        }
+    </script>
+</body>
+</html>

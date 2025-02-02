@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de Andrew Games</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            background: linear-gradient(135deg, #e8f0fe, #d3e3fc);
+            color: #333;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evitar scroll */
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 95%;
+            max-width: 650px;
+            padding: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin: 0;
+            color: black;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .content a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        /* Estilo mejorado para el botón */
+        #Button {
+            background-color: #1a73e8; /* Color base del botón */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px; /* Tamaño más grande */
+            font-size: 16px; /* Texto más grande */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Transiciones suaves */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            margin-top: 20px; /* Espaciado hacia abajo */
+        }
+
+        /* Estilo del botón cuando se pasa el ratón por encima */
+        #Button:hover {
+            background-color: #155ab6; /* Color del botón al pasar el mouse */
+            transform: translateY(-3px); /* Desplazamiento hacia arriba */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+        }
+
+        /* Efecto de presionar el botón */
+        #Button:active {
+            transform: translateY(1px); /* Efecto de presionar el botón */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra original */
+        }
+
+        /* Tema oscuro */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+                color: #fff;
+            }
+
+            .container {
+                background: #1e1e1e;
+            }
+
+            .header h1 {
+                color: white;
+            }
+
+            .content a {
+                color: #8ab4f8;
+            }
+
+            .footer {
+                color: #aaa;
+            }
+
+            /* Estilo del botón en tema oscuro */
+            #Button {
+                background-color: #333; /* Fondo oscuro para el botón en tema oscuro */
+                color: #fff; /* Texto blanco */
+                box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Sombra ligera */
+            }
+
+            #Button:hover {
+                background-color: #444; /* Color del botón al pasar el mouse en tema oscuro */
+                box-shadow: 0 6px 12px rgba(255, 255, 255, 0.3); /* Sombra más intensa */
+            }
+
+            #Button:active {
+                background-color: #555; /* Efecto de presionar el botón en tema oscuro */
+                box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Sombra original */
+            }
+        }
+
+        /* Tema claro */
+        @media (prefers-color-scheme: light) {
+            /* Los estilos del botón en el tema claro son los mismos por defecto */
+            #Button {
+                background-color: #1a73e8; /* Color base en tema claro */
+                color: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            }
+
+            #Button:hover {
+                background-color: #155ab6; /* Color del botón al pasar el mouse */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+            }
+
+            #Button:active {
+                background-color: #1a66b1; /* Efecto de presionar el botón */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra original */
+            }
+        }
+    </style>
+</head>
+
+<script>
+    // Usamos el objeto 'versions' expuesto desde preload.js
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('node-version').textContent = versions.node();
+        document.getElementById('chrome-version').textContent = versions.chrome();
+        document.getElementById('electron-version').textContent = versions.electron();
+    });
+</script>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Andrew Games</h1>
+            <img src="Main Assets/icon.png" alt="Logo de Andrew Games">
+        </div>
+
+        <div class="content">
+            <p>Andrew Games al día, comprueba actualizaciones si hay alguna disponible.</p>
+            <p>Versión 5.2.0 (Build Oficial) (win32-x64)</p>
+            <p>
+                Andrew Games es posible gracias al proyecto de código abierto 
+                <a href="https://www.electronjs.org/">Electron JS</a> 
+                y el famoso <a href="https://www.chromium.org">Chromium</a>.
+            </p>
+            <button id="Button">Ir a Acerca Completo</button> <!-- Botón en una buena posición -->
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Andrew Studies. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <script>
+        // Redirigir a la página completa de detalles
+        document.getElementById('Button').addEventListener('click', function() {
+            window.location.href = 'version_complete.html'; // Asegúrate de que la página existe
+        });
+    </script>
+</body>
+</html>
